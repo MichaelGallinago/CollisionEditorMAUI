@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollisionEditorMAUI.MainPage">
+
+    <ContentPage.MenuBarItems VerticalAlignment="Center" Foreground="Black" Height="20">
+        <MenuBarItem Text="File">
+            <MenuFlyoutSubItem Text="Load">
+                <!--InputGestureText="Ctrl+D"-->
+                <MenuFlyoutItem Text="TileMap"  Command="{Binding MenuOpenTileMapCommand}"/>
+                <!--InputGestureText="Ctrl+W"-->
+                <MenuFlyoutItem Text="AngleMap" Command="{Binding MenuOpenAngleMapCommand}"/>
+            </MenuFlyoutSubItem>
+
+            <MenuFlyoutSubItem Text="Unload">
+                <MenuFlyoutItem Text="TileMap"  Command="{Binding MenuUnloadTileMapCommand}"/>
+                <MenuFlyoutItem Text="AngleMap" Command="{Binding MenuUnloadAngleMapCommand}"/>
+            </MenuFlyoutSubItem>
+
+            <!--InputGestureText="Ctrl+A"-->
+            <MenuFlyoutItem Text="Unload All" HorizontalAlignment="Right" Command="{Binding MenuUnloadAllCommand}"/>
+
+            <MenuFlyoutSubItem Text="Save">
+                <MenuFlyoutItem Text="AngleMap"  Command="{Binding MenuSaveAngleMapCommand}"/>
+                <MenuFlyoutItem Text="HeightMap" Command="{Binding MenuSaveHeightMapCommand}"/>
+                <MenuFlyoutItem Text="WidthMap"  Command="{Binding MenuSaveWidthMapCommand}"/>
+                <MenuFlyoutItem Text="TileMap"   Command="{Binding MenuSaveTileMapCommand}"/>
+            </MenuFlyoutSubItem>
+
+            <!--InputGestureText="Ctrl+S"-->
+            <MenuFlyoutItem Text="Save All" Command="{Binding MenuSaveAllCommand}"/>
+            <!--InputGestureText="Alt+F4"-->
+            <MenuFlyoutItem Text="Exit"     Command="{Binding ExitAppCommand}"/>
+
+        </MenuBarItem>
+        <MenuBarItem Text="Help">
+            <MenuFlyoutItem Text="Call tech support" Clicked="Help_Click"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="164*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="43*" />
+            <ColumnDefinition Width="23*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="43*" />
+            <ColumnDefinition Width="23*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="43*" />
+            <ColumnDefinition Width="23*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="17*" />
+            <ColumnDefinition Width="139*" />
+            <ColumnDefinition Width="139*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        
+        <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
+            <MenuItem Header="File">
+                <MenuItem Header="Load" >
+                    <MenuItem Header="TileMap"  InputGestureText="Ctrl+D" Command="{Binding MenuOpenTileMapCommand}"/>
+                    <MenuItem Header="AngleMap" InputGestureText="Ctrl+W" Command="{Binding MenuOpenAngleMapCommand}"/>
+                </MenuItem>
+
+                <MenuItem Header="Unload">
+                    <MenuItem Header="TileMap"  Command="{Binding MenuUnloadTileMapCommand}"/>
+                    <MenuItem Header="AngleMap" Command="{Binding MenuUnloadAngleMapCommand}"/>
+                </MenuItem>
+
+                <MenuItem Header="Unload All" InputGestureText="Ctrl+A" HorizontalAlignment="Right" Command="{Binding MenuUnloadAllCommand}"/>
+
+                <MenuItem Header="Save">
+                    <MenuItem Header="AngleMap"  Command="{Binding MenuSaveAngleMapCommand}"/>
+                    <MenuItem Header="HeightMap" Command="{Binding MenuSaveHeightMapCommand}"/>
+                    <MenuItem Header="WidthMap"  Command="{Binding MenuSaveWidthMapCommand}"/>
+                    <MenuItem Header="TileMap"   Command="{Binding MenuSaveTileMapCommand}"/>
+                </MenuItem>
+
+                <MenuItem Header="Save All" InputGestureText="Ctrl+S" Command="{Binding MenuSaveAllCommand}"/>
+                <MenuItem Header="Exit"     InputGestureText="Alt+F4" Command="{Binding ExitAppCommand}"/>
+
+            </MenuItem>
+            <MenuItem Header="Help" >
+                <MenuItem Header="Call tech support" Click="Help_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
+        <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
+              MouseLeftButtonDown="RectanglesGrid_MouseLeftButtonDown" MouseRightButtonDown="RectanglesGrid_MouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
+        <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11" IsHitTestVisible="False"/>
+
+        <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
+            <TextBlock x:Name="Heights"  HorizontalAlignment="Center"/>
+        </Border>
+        <Border Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="8" Background="GhostWhite" BorderBrush="Silver" BorderThickness="0.8,0.8,0.8,2" CornerRadius="3,3,3,3">
+            <TextBlock x:Name="Widths" HorizontalAlignment="Center"/>
+        </Border>
+
+        <TextBox Grid.Column="2" Grid.Row="9" Grid.RowSpan="2" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=ByteAngle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                 Name="TextBoxByteAngle" Padding="2,0,0,0"  Background="#FFB1B1B1"/>
+        <TextBox Grid.Column="5" Grid.Row="9" Grid.RowSpan="2" TextWrapping="Wrap" IsEnabled="False" Text="{Binding Path=HexAngle,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 Name="TextBoxHexAngle"  Padding="2,0,0,0"  Background="#FFB1B1B1" PreviewKeyDown="TextBoxHexAngle_PreviewKeyDown"/>
+        <TextBlock Grid.Column="8" Grid.Row="9" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="0°" Name="TextBlockFullAngle" Background="#FFB1B1B1" Padding="2,0,0,0"/>
+
+        <Button Grid.Column="3" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="ByteAngleIncrimentButton" Grid.Row="9"  Height="10" Width="25" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" x:Name="TriangleUpByteAngle"/>
+        </Button>
+        <Button Grid.Column="3" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="ByteAngleDecrementButton" Grid.Row="10" Height="10" Width="25" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" x:Name="TriangleDownByteAngle"/>
+        </Button>
+
+        <Button Grid.Column="6" Command="{Binding AngleIncrementCommand}" IsEnabled="False" x:Name="HexAngleIncrimentButton" Grid.Row="9" Height="10" Width="25"  HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 6 L 12 6 L 6 0 Z" Stretch="Uniform" x:Name="TriangleUpHexAngle"/>
+        </Button>
+        <Button Grid.Column="6" Command="{Binding AngleDecrementCommand}" IsEnabled="False" x:Name="HexAngleDecrementButton" Grid.Row="10" Height="10" Width="25" HorizontalAlignment="Left">
+            <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" x:Name="TriangleDownHexAngle"/>
+        </Button>
+
+        <ScrollViewer x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
+            <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent"
+                         RenderOptions.BitmapScalingMode="NearestNeighbor" MouseLeftButtonDown="TileMapGrid_MouseLeftButtonDown"/>
+        </ScrollViewer>
+
+        <TextBox Grid.Column="12" Grid.Row="9" Grid.RowSpan ="2" Background="#FFD8D8D8" x:Name="SelectTileTextBox" IsEnabled="False" TextWrapping="Wrap" 
+                 Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>
+        <Button  Grid.Column="13" Grid.Row="9" Grid.RowSpan ="2" Background="#FFD8D8D8" x:Name="SelectTileButton"  IsEnabled="False" Content="Select Tile" Command="{Binding SelectTileCommand}"/>
+    </Grid>
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="CTRL+D" Command="{Binding MenuOpenTileMapCommand}"/>
+        <KeyBinding Gesture="CTRL+W" Command="{Binding MenuOpenAngleMapCommand}"/>
+        <KeyBinding Gesture="CTRL+A" Command="{Binding MenuUnloadAllCommand}"/>
+        <KeyBinding Gesture="CTRL+S" Command="{Binding MenuSaveAllCommand}"/>
+    </Window.InputBindings>
+
+</ContentPage>
