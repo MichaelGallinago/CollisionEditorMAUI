@@ -1,10 +1,5 @@
-﻿using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System.Globalization;
-using System.Drawing.Imaging;
-using System.Drawing;
+﻿using System.Globalization;
 using System.Text;
-using System;
 
 namespace CollisionEditor.Model
 {
@@ -23,21 +18,6 @@ namespace CollisionEditor.Model
                 builder.Append((char)(value + (value < 10 ? 48 : 55)));
 
             return string.Join(" ", builder.ToString().ToCharArray());
-        }
-
-        public static BitmapSource BitmapConvert(Bitmap bitmap, double dpi = 0.1)
-        {
-            var bitmapData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadOnly, bitmap.PixelFormat);
-
-            var bitmapSource = BitmapSource.Create(bitmapData.Width, bitmapData.Height, dpi, dpi,
-                PixelFormats.Bgra32, null,
-                bitmapData.Scan0, bitmapData.Stride * bitmapData.Height, bitmapData.Stride);
-
-            bitmap.UnlockBits(bitmapData);
-
-            return bitmapSource;
         }
 
         public static string GetHexAngle(byte angle)
@@ -59,12 +39,12 @@ namespace CollisionEditor.Model
         {
             if (tileSet.Tiles.Count < angleMap.Values.Count)
             {
-                Size size = tileSet.TileSize;
+                Vector2<int> size = tileSet.TileSize;
                 for (int i = tileSet.Tiles.Count; i < angleMap.Values.Count; i++)
                 {
-                    tileSet.Tiles.Add(new Bitmap(size.Width, size.Height));
-                    tileSet.WidthMap.Add(new byte[size.Width]);
-                    tileSet.HeightMap.Add(new byte[size.Height]);
+                    tileSet.Tiles.Add(new Bitmap(size.X, size.Y));
+                    tileSet.WidthMap.Add(new byte[size.X]);
+                    tileSet.HeightMap.Add(new byte[size.Y]);
                 }
             }
             else

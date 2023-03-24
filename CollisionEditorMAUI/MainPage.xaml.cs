@@ -3,6 +3,7 @@ using CollisionEditor.Model;
 using CollisionEditor.View;
 using Microsoft.Maui.Controls.Shapes;
 using System.Diagnostics;
+using Microsoft.UI.Xaml;
 
 namespace CollisionEditor;
 
@@ -12,7 +13,7 @@ public partial class MainPage : ContentPage
 
 	public MainPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
         windowMain = new MainViewModel(this);
         DataContext = windowMain;
     }

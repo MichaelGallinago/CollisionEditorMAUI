@@ -6,37 +6,50 @@ namespace CollisionEditor.Model
 {
     public class TileSet
     {
-        public readonly Size TileSize;
+        public readonly Vector2<int> TileSize;
 
         public List<Bitmap> Tiles { get; private set; }
         public List<byte[]> WidthMap { get; private set; }
         public List<byte[]> HeightMap { get; private set; }
 
         public TileSet(string path, int tileWidth = 16, int tileHeight = 16,
-            Size separate = new Size(), Size offset = new Size())
+            Vector2<int> separate = new(), Vector2<int> offset = new())
         {
-            TileSize = new Size(tileWidth, tileHeight);
+            TileSize = new Vector2<int>(tileWidth, tileHeight);
 
             Tiles = new List<Bitmap>();
             WidthMap  = new List<byte[]>();
             HeightMap = new List<byte[]>();
 
-            Bitmap bitmap = new Bitmap(path);
+            Image image = new Image
+            {
+                Source = ImageSource.FromFile(path)
+            };
+            var bitmap = new Bitmap(image);
 
-            Vector2<int> cellCount = new Vector2<int>(
-                (bitmap.Width  - offset.Width)  / TileSize.Width,
-                (bitmap.Height - offset.Height) / TileSize.Height);
+            var cellCount = new Vector2<int>(
+                ((int)image.Width  - offset.X) / TileSize.X,
+                ((int)image.Height - offset.Y) / TileSize.Y);
 
             for (int y = 0; y < cellCount.Y; y++)
             {
                 for (int x = 0; x < cellCount.X; x++)
                 {
-                    Rectangle tileBounds = new Rectangle(
-                        x * (TileSize.Width  + separate.Width)  + offset.Width,
-                        y * (TileSize.Height + separate.Height) + offset.Height,
-                        TileSize.Width, TileSize.Height);
+                    byte[] pixelsColors = new byte[TileSize.X * TileSize.Y * 4];
+                    for (int i = 0; i < TileSize.Y; i++)
+                    {
+                        for (int j = 0; j < TileSize.X; j++)
+                        {
+                            for (int k = 0; k < 4; k++)
+                            {
+                                pixelsColors[(i * TileSize.X + j) * 4 + k] = bitmap.PixelsColors[
+                                    //((offset.Y + i + ) * TileSize.X + offset.X + TileSize.X * cellCount.X) * 4 + k];
+                                    0];
+                            }
+                        }
+                    }
 
-                    Tiles.Add(bitmap.Clone(tileBounds, bitmap.PixelFormat));
+                    Tiles.Add(new Bitmap(pixelsColors));
                     if (Tiles.Count == int.MaxValue)
                     {
                         CreateCollisionMap();
@@ -52,12 +65,12 @@ namespace CollisionEditor.Model
         {
             for (int i = 0; i < Tiles.Count; i++)
             {
-                WidthMap.Add(new byte[TileSize.Width]);
-                HeightMap.Add(new byte[TileSize.Height]);
+                WidthMap.Add(new byte[TileSize.X]);
+                HeightMap.Add(new byte[TileSize.Y]);
 
-                for (int x = 0; x < TileSize.Width; x++)
+                for (int x = 0; x < TileSize.X; x++)
                 {
-                    for (int y = 0; y < TileSize.Height; y++)
+                    for (int y = 0; y < TileSize.Y; y++)
                     {
                         if (Tiles[i].GetPixel(x, y).A > 0)
                         {
