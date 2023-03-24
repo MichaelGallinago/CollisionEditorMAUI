@@ -73,7 +73,7 @@
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
 
-        <UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
+        <alohakit:UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
         <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
               MouseLeftButtonDown="RectanglesGrid_MouseLeftButtonDown" MouseRightButtonDown="RectanglesGrid_MouseRightButtonDown" MouseEnter="RectanglesGrid_MouseEnter" MouseLeave="RectanglesGrid_MouseLeave"/>
         <Canvas Grid.Column="0" Grid.Row="3"  Height="128" Width="128" Name ="canvasForLine" Grid.ColumnSpan="11" IsHitTestVisible="False"/>
@@ -106,7 +106,7 @@
         </Button>
 
         <ScrollView x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
-            <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent"
+            <alohakit:UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent"
                          RenderOptions.BitmapScalingMode="NearestNeighbor" MouseLeftButtonDown="TileMapGrid_MouseLeftButtonDown"/>
         </ScrollView>
 
