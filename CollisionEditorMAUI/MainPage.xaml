@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:alohakit="clr-namespace:AlohaKit.Layouts;assembly=AlohaKit.Layouts"
              x:Class="CollisionEditorMAUI.MainPage">
 
     <ContentPage.MenuBarItems VerticalAlignment="Center" Foreground="Black" Height="20">
@@ -104,10 +105,10 @@
             <Path Fill="Black" Data="M 0 0 L 6 6 L 12 0 Z" Stretch="Uniform" x:Name="TriangleDownHexAngle"/>
         </Button>
 
-        <ScrollViewer x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
+        <ScrollView x:Name="scrollViewer" Grid.Column="12" Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <UniformGrid x:Name="TileMapGrid" Columns="8" SnapsToDevicePixels="true" Background="Transparent"
                          RenderOptions.BitmapScalingMode="NearestNeighbor" MouseLeftButtonDown="TileMapGrid_MouseLeftButtonDown"/>
-        </ScrollViewer>
+        </ScrollView>
 
         <TextBox Grid.Column="12" Grid.Row="9" Grid.RowSpan ="2" Background="#FFD8D8D8" x:Name="SelectTileTextBox" IsEnabled="False" TextWrapping="Wrap" 
                  Text="{Binding Path=ChosenTile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="SelectTileTextBox_PreviewKeyDown"/>
