@@ -5,6 +5,7 @@ using Microsoft.Maui.Controls.Shapes;
 using System.Diagnostics;
 using Microsoft.UI.Xaml;
 
+
 namespace CollisionEditor;
 
 public partial class MainPage : ContentPage
@@ -110,7 +111,7 @@ public partial class MainPage : ContentPage
             windowMain.SelectTile();
     }
 
-    private void TextBoxHexAngle_PreviewKeyDown(object sender, KeyEventArgs e)
+    private void TextBoxHexAngle_PreviewKeyDown(object sender, EventArgs e)
     {
         bool isCtrlKeyDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
         Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };
@@ -261,6 +262,7 @@ public partial class MainPage : ContentPage
 
         DrawRedLine();
     }
+
 
     private void Help_Click(object sender, RoutedEventArgs e)
     {
