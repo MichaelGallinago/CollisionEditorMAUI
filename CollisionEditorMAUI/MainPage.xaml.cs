@@ -4,6 +4,7 @@ using CollisionEditor.View;
 using Microsoft.Maui.Controls.Shapes;
 using System.Diagnostics;
 
+
 namespace CollisionEditor;
 
 public partial class MainPage : ContentPage
@@ -260,6 +261,7 @@ public partial class MainPage : ContentPage
 
         DrawRedLine();
     }
+
 
     private void Help_Click(object sender, RoutedEventArgs e)
     {
