@@ -109,7 +109,7 @@ public partial class MainPage : ContentPage
             windowMain.SelectTile();
     }
 
-    private void TextBoxHexAngle_PreviewKeyDown(object sender, KeyEventArgs e)
+    private void TextBoxHexAngle_PreviewKeyDown(object sender, EventArgs e)
     {
         bool isCtrlKeyDown = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
         Key[] exceptions = new Key[] { Key.Back, Key.Delete, Key.Left, Key.Right };

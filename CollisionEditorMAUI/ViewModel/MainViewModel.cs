@@ -1,9 +1,7 @@
-﻿using CollisionEditor.Model;
+﻿ using CollisionEditor.Model;
 using CollisionEditor.View;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows;
+ using System.Windows.Input;
+ using System.Windows;
 using System.ComponentModel;
 using System.Collections;
 using System.Drawing;
@@ -209,11 +207,11 @@ namespace CollisionEditor.ViewModel
             page.TileMapGrid.Height = (int)Math.Ceiling((double)tileCount / page.TileMapGrid.Columns) * (TileSet.TileSize.Height * tileMapTileScale + tileMapSeparation);
         }
 
-        private void MenuSaveTileMap()
+        private async void MenuSaveTileMap()
         {
             if (TileSet.Tiles.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Error: You haven't chosen TileMap to save");
+                await DisplayAlert ("Error: You haven't chosen TileMap to save");
                 return;
             }
 
