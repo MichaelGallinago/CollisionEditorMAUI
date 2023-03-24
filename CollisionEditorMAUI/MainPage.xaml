@@ -71,36 +71,6 @@
             <ColumnDefinition Width="139*" />
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
-        
-        <Menu VerticalAlignment="Center" Grid.Column="0"  Grid.ColumnSpan="15" Foreground="Black" Height="20">
-            <MenuItem Header="File">
-                <MenuItem Header="Load" >
-                    <MenuItem Header="TileMap"  InputGestureText="Ctrl+D" Command="{Binding MenuOpenTileMapCommand}"/>
-                    <MenuItem Header="AngleMap" InputGestureText="Ctrl+W" Command="{Binding MenuOpenAngleMapCommand}"/>
-                </MenuItem>
-
-                <MenuItem Header="Unload">
-                    <MenuItem Header="TileMap"  Command="{Binding MenuUnloadTileMapCommand}"/>
-                    <MenuItem Header="AngleMap" Command="{Binding MenuUnloadAngleMapCommand}"/>
-                </MenuItem>
-
-                <MenuItem Header="Unload All" InputGestureText="Ctrl+A" HorizontalAlignment="Right" Command="{Binding MenuUnloadAllCommand}"/>
-
-                <MenuItem Header="Save">
-                    <MenuItem Header="AngleMap"  Command="{Binding MenuSaveAngleMapCommand}"/>
-                    <MenuItem Header="HeightMap" Command="{Binding MenuSaveHeightMapCommand}"/>
-                    <MenuItem Header="WidthMap"  Command="{Binding MenuSaveWidthMapCommand}"/>
-                    <MenuItem Header="TileMap"   Command="{Binding MenuSaveTileMapCommand}"/>
-                </MenuItem>
-
-                <MenuItem Header="Save All" InputGestureText="Ctrl+S" Command="{Binding MenuSaveAllCommand}"/>
-                <MenuItem Header="Exit"     InputGestureText="Alt+F4" Command="{Binding ExitAppCommand}"/>
-
-            </MenuItem>
-            <MenuItem Header="Help" >
-                <MenuItem Header="Call tech support" Click="Help_Click"/>
-            </MenuItem>
-        </Menu>
 
         <UniformGrid x:Name="TileGrid" Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Background="Transparent"/>
         <Grid x:Name="RectanglesGrid"  Grid.Column="0" Grid.Row="3" Height="128" Width="128" Grid.ColumnSpan="11" SnapsToDevicePixels="true" Focusable="True" Background="Transparent" 
