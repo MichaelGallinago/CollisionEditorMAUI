@@ -43,8 +43,7 @@ namespace CollisionEditor.Model
                             for (int k = 0; k < 4; k++)
                             {
                                 pixelsColors[(i * TileSize.X + j) * 4 + k] = bitmap.PixelsColors[
-                                    //((offset.Y + i + ) * TileSize.X + offset.X + TileSize.X * cellCount.X) * 4 + k];
-                                    0];
+                                    ((offset.Y + i * (TileSize.Y + separate.Y)) * (int)image.Width + (offset.X + j * (TileSize.X + separate.X))) * 4 + k];
                             }
                         }
                     }
